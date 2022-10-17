@@ -5,11 +5,13 @@ let dateInput = document.getElementById("dateInput");
 let textarea = document.getElementById("descriptionArea");
 let msg = document.getElementById("msg");
 let tasks = document.getElementById("tasks");
+let tasks2 = document.getElementById("tasks2");
 let add = document.getElementById("add");
 let modal = document.querySelector(".modal");
 
 // modal
 (function () {
+  console.log( document.querySelectorAll(".open-modal"))
   document.querySelectorAll(".open-modal").forEach(function (trigger) {
     trigger.addEventListener("click", function () {
       hideAllModalWindows();
@@ -57,7 +59,7 @@ form.addEventListener("submit", (e) => {
 });
 
 let formValidation = () => {
-  if (textInput.value === "") {
+  if (textInput.value === "" && textInput.date === "") {
     console.log("failure");
     msg.innerHTML = "Task cannot be blank";
   } else {
@@ -75,84 +77,68 @@ let formValidation = () => {
 
 // data to display
 let todoData = [
-  // {
-  //   text: "This is title",
-  //   description: "title 1 and more",
-  //   done: false,
-  //   date: "19/10/2022",
-  // },
-  // {
-  //   text: "This is second title",
-  //   description: "I am the second task",
-  //   done: false,
-  //   date: "02/10/2022",
-  // },
-  // {
-  //   text: "This is third title",
-  //   description: "title 3 and more",
-  //   done: false,
-  //   date: "18/10/2022",
-  // },
-  // {
-  //   text: "This is forth title",
-  //   description: "title 4 and more",
-  //   done: false,
-  //   date: "22/02/2022",
-  // },
+  {
+    text: "This is title",
+    description: "title 1 and more",
+    date: "19/10/2022",
+  },
+  {
+    text: "This is second title",
+    description: "I am the second task",
+    date: "02/10/2022",
+  },
+  {
+    text: "This is third title",
+    description: "title 3 and more",
+    date: "18/10/2022",
+  },
+  {
+    text: "This is forth title",
+    description: "title 4 and more",
+    date: "22/02/2022",
+  },
 ];
 
-let completedData = [];
 
 let addData = () => {
   todoData.push({
     text: textInput.value,
     description: textarea.value,
-    done: false,
     date: dateInput.value,
   });
 
   localStorage.setItem("data", JSON.stringify(todoData));
-
-  // console.log(todoData);
   createTasks();
 };
 
-//event listener for todo event
-// Select the entire list
-const list = document.querySelector(".todo");
-// Add a click event listener to the ltist and its children
-list.addEventListener("click", (e) => {
-  tasks.done = e.target.checked;
-  localStorage.setItem("data", JSON.stringify(todoData));
 
-  if (tasks.done) {
-    list.classList.add("done");
-  } else {
-    list.classList.remove("done");
-  }
-});
+let resetForm = () => {
+  textInput.value = "";
+  dateInput.value = "";
+  textarea.value = "";
+};
+
 
 let createTasks = () => {
-  // const isDone = todoData.done ? "checked" : "";
-  // tasks.setAttribute('class', `todo-task${isDone}`)
-  tasks.innerHTML = "";
+   tasks.innerHTML = "";
   todoData.forEach((x, y) => {
     return (tasks.innerHTML += `
       <li  id=${y} class='task-list'>
-        <input type="checkbox" class="checkBox" >
+        <input type="checkbox" class="checkBox" onclick="changeListener(this)" >
         <span class="title-text">${x.text}</span>
-        
-        <span class="date-text">${x.date}</span>
+        <br />
+        <span class="date-text">Due date: ${x.date}</span>
+        <br />
+
         <p>${x.description}</p>
         <span class="btn-utils">
-          <button onClick= "editTask(this)" class = "edit" data-target="modal-1"> Edit</button>
+          <button onClick= "editTask(this)" class = "open-modal edit" data-target="modal-1"> Edit</button>
           <button onClick ="deleteTask(this);createTasks()" class="btn-delete"> Delete</button>
         </span>
       </li>
     `);
   });
-  // list.append(tasks);
-  // resetForm();
+    resetForm();
 };
 
 let deleteTask = (e) => {
@@ -180,31 +166,57 @@ let editTask = (e) => {
   deleteTask(e);
 };
 
-let resetForm = () => {
-  textInput.value = "";
-  dateInput.value = "";
-  textarea.value = "";
-};
-console.log(checkbox.nodeName);
 let Check = document.querySelectorAll(".checkBox");
 
+let completedData = [];
 
-Check.forEach ((c) =>{
-  c.addEventListener("change",  (e) => {  
-    if (e.target.checked === true) {
-      console.log(e.target.parentElement.nodeName);
-      const completedDat = todoData.splice(e.target.parentElement.id, 1);
-      localStorage.setItem("todoData", JSON.stringify(todoData));
-      console.log(completedDat);
-      createTasks();
+const changeListener = (e) => { 
+  let completedDat = todoData.splice(e.target.parentElement.id, 1);
+  localStorage.setItem("todoData", JSON.stringify(todoData));
+  completedData.push(...completedDat)
+  localStorage.setItem("completedItem", JSON.stringify(completedData))
 
+  createTasks()
+  completedTask()
+}
+
+
+let completedTask = () => {  
+  console.log(completedData)
+  tasks2.innerHTML = "";
+  completedData.forEach((x, y) => {
+    const dueDate = new Date(x.date);
+    let today = new Date();
+    let diff = dueDate.getTime() - today.getTime();
+    let diffInDays = Math.ceil(diff /(1000*60*60*24));
+  
+    checkdueDateDIf =() =>{
+      if(diffInDays > 0){
+        return `you finished the task early by ${diffInDays} days `
+      }
+      else if(diffInDays < 0){
+        console.log(diffInDays);
+        return ` <span class="msg"> Late </span> <span> are late by<span class="msg"> ${diffInDays * (-1) } days </span></span>`
+
+      }
+      else{
+        return `<span>You completed this task on time</span>`
+      }
     }
-  })
-}) 
+    return (tasks2.innerHTML += `
+    <li  id=${y} class='task-list'>
+    <span class="warning-dueDate">${checkdueDateDIf()}</span>
+    <span class="title-text">${x.text}</span>
+    <span class="date-text">Due date: ${x.date}</span>
+    <p>${x.description}</p>
+    <span class="btn-utils">
+      <button onClick ="deleteTask(this);createTasks()" class="btn-delete"> Delete</button>
+    </span>
+  </li>
+    `);
+  });
+   resetForm();
+};
 
-// getting data from local storage
-completedData.push(...completedDat)
-  localStorage.setItem("completedItem", JSON.stringify(completeData))
-  console.log(completeData);  
 
 

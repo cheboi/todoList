@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta http-equiv="Refresh" content="1"> -->
     <title>ToDO App</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -18,7 +19,7 @@ Able to mark a task as completed and move it from uncompleted to completed
 
 Able to show tasks that were completed on time and by how many days, and tasks that were submitted Late.  -->
     <div class="App">
-      <h2>Todo App</h2>
+      <h2 class="todo-logo">Todo App</h2>
       <div class="container">
         <button class="open-modal" data-target="modal-1">Add New Task +</button>
         <form id="modal-1" class="modal-window">
@@ -30,11 +31,11 @@ Able to show tasks that were completed on time and by how many days, and tasks t
               </h5>
             </div>
             <div class="text-body">
-              <p>Task Title</p>
+              <p class="tasks-title">Task Title</p>
               <input type="text" class="form-control" name="" id="textInput" />
               <div id="msg"></div>
               <br />
-              <p>Description</p>
+              <p class="tasks-title">Description</p>
               <textarea
                 name=""
                 class="form-control"
@@ -43,7 +44,7 @@ Able to show tasks that were completed on time and by how many days, and tasks t
                 rows="5"
               ></textarea>
               <br />
-              <p>Due Date</p>
+              <p class="tasks-title">Due Date</p>
               <input type="date" class="form-control" name="" id="dateInput" />
             </div>
             <div class="modal-footer">
@@ -55,11 +56,12 @@ Able to show tasks that were completed on time and by how many days, and tasks t
         <div class="modal-fader" id=""></div>
       </div>
       <div class="todo">
-        <h5 class="text-center">Activities ToDo</h5>
+        <h3 class="text-center">Activities ToDo</h3>
         <ul id="tasks"></ul>
       </div>
       <div class="completed">
-        <h5>Completed Task</h5>
+        <h3 class="text-center">Completed Task</h3>
+        <ul id="tasks2"></ul>
       </div>
     </div>
   </body>
