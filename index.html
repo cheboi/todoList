@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDO App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Able to create a task with a title, description and Date (expected completion date) 
+
+Able to update (on update Pre-populate the input fields) and delete a task 
+
+Able to List all completed and uncompleted tasks (if no Completed /uncompleted show a message)  
+
+Able to mark a task as completed and move it from uncompleted to completed  
+
+Able to show tasks that were completed on time and by how many days, and tasks that were submitted Late.  -->
+    <div class="App">
+      <h2>Todo App</h2>
+      <div class="container">
+        <button class="open-modal" data-target="modal-1">Add New Task +</button>
+        <form id="modal-1" class="modal-window">
+          <!-- id="form" -->
+          <div class="modal-container">
+            <div class="task-header">
+              <h5 class="modal-title" id="modal-task" data-target="modal">
+                Add New Task
+              </h5>
+            </div>
+            <div class="text-body">
+              <p>Task Title</p>
+              <input type="text" class="form-control" name="" id="textInput" />
+              <div id="msg"></div>
+              <br />
+              <p>Description</p>
+              <textarea
+                name=""
+                class="form-control"
+                id="descriptionArea"
+                cols="30"
+                rows="5"
+              ></textarea>
+              <br />
+              <p>Due Date</p>
+              <input type="date" class="form-control" name="" id="dateInput" />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="modal-btn modal-hide">Close</button>
+              <button type="submit" id="add" class="add-btn">Add</button>
+            </div>
+          </div>
+        </form>
+        <div class="modal-fader" id=""></div>
+      </div>
+      <div class="todo">
+        <h5 class="text-center">Activities ToDo</h5>
+        <ul id="tasks"></ul>
+      </div>
+      <div class="completed">
+        <h5>Completed Task</h5>
+      </div>
+    </div>
+  </body>
+  <script src="app.js"></script>
+</html>

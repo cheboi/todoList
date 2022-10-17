@@ -1,0 +1,179 @@
+.App{
+  display: grid;
+  grid-template-rows: repeat( none ,1fr, 2 fr);
+  /* margin-top: 50px; */
+  /* margin-left: 8%; */
+  /* margin-right: 8%; */
+  background-color: #fff;
+  /* width: 80vw; */
+  /* height: 80vh; */
+  /* border: 5px solid rgb(21, 75, 7); */
+  border-radius: 8px;
+  padding: 5px;
+  /* overflow-y: scroll; */
+  text-align: center;
+   
+}
+.container {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border: 5px solid rgb(21, 75, 7);
+    border-radius: 8px;
+    /* padding: 15px; */
+    /* overflow-y: scroll; */
+    text-align: center;
+}
+.todo{
+  height: 100%;
+
+}
+.modal-fader {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 99998;
+    background: rgba(0,0,0,0.8);
+}
+.modal-fader.active {
+    display: block;
+}
+
+.modal {
+    display: none;
+    position: fixed; 
+    padding-top: 50px;
+    left: 0; 
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .modal-window {
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    top: 50px;
+}
+    .modal-window.active {
+        display: block;
+    }
+  .modal-container {
+    position: relative; 
+    background-color: white;
+    padding: 20px; 
+    margin: auto; 
+    width: 75%;  
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+  .modal-btn {
+    background: #d41818;
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    box-shadow: none;
+    border-radius: 3px;
+    text-decoration: none;
+}
+  .add-btn{
+    background-color: rgb(5, 118, 170);
+    padding: 10px 15px;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #fff;
+  }
+  .btn-utils{
+    display:flex;
+    text-align: center;
+  }
+  .btn-delete{
+    background-color: #d41818;
+  }
+  .title-text{
+    font-style: italic;
+    font-size:20px;
+  }
+  .date-text{
+    font-size: small;
+  }
+  .btn-utils{
+    display: flex;
+  }
+  .text-center{
+    color: black;
+  }
+  .todo {
+    border: 5px solid #3f802e;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    border-radius: 8px;
+    padding: 5px;
+  }
+  .completed{
+    border: 5px solid #3f802e;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    border-radius: 8px;
+    padding: 5px;
+  }
+  .task-list{
+    display: flex;
+    flex-direction: column;
+    padding-top: 0px;
+    background-color: rgb(187, 187, 105);
+    margin: 15px;
+    border-radius: 8px;
+    list-style: none;
+  }
+  #tasks {
+    margin: 0;
+    border: 5px solid #abcea1;
+  }
+  
+ #tasks div .options {
+    justify-self: center;
+    display: flex;
+    gap: 20px;
+  }
+  
+  #tasks div .options i {
+    cursor: pointer;
+  }
+  #tasks div .btn-utils{
+    background-color: yellow;
+    display:flex;
+    align-content: space-between;
+  }
+  #tasks div .btn-utils button .btn-delete{
+    background-color: red;
+    color: white;
+  }
+  #msg {
+    color: red;
+  }
+
+  @-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+  }
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
